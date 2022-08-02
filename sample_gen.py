@@ -103,6 +103,8 @@ latent_dim = args.latent_space
 
 if args.data is not None:
     data = pd.read_csv(args.data, sep='\t', index_col=0)
+    # truncate everything after the 4th decimal
+    data = np.trunc(1000 * data) / 1000
 
     train_data, val_data, test_data = SplitHandler.create_splits(input_data=data, without_val=False)
 
