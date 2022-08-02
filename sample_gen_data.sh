@@ -6,6 +6,7 @@
 #SBATCH --error=./error_reports/slurm.%N.%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=karlberb@ohsu.edu,kirchgae@ohsu.edu
+#SBATCH --mem 100G
 
 source venv/bin/activate
 python3 sample_gen.py -lt $1 -p $2 --data $3
