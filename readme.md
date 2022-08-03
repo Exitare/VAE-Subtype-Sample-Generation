@@ -3,6 +3,11 @@ Goal is to generate TCGA cohort samples
     based on encoding of all TCGA sample
     use gene expression data type only
 
+2022-08-03
+file prepped with 8009 samples and 99 subtypes
+labels encoded
+to /VAE-Subtype-Sample-Generation/data on Exacloud
+
 2022-08-02
 sbatch sample_gen.sh -lt 1000 -p v00 --data data/BRCA_feat_ntrsct_25.tsv
 sbatch sample_gen.sh 1000 v0.1 path_to_file
