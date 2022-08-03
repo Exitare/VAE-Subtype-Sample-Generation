@@ -7,6 +7,8 @@ Goal is to generate TCGA cohort samples
 file prepped with 8009 samples and 99 subtypes
 labels encoded
 to /VAE-Subtype-Sample-Generation/data on Exacloud
+sbatch sample_gen_data.sh 1000 v0.2 data/cmbnd_25_lbl_xfrm.tsv
+* expecting out_of_memory fail
 
 2022-08-02
 sbatch sample_gen.sh -lt 1000 -p v00 --data data/BRCA_feat_ntrsct_25.tsv
