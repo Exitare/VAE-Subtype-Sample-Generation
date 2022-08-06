@@ -4,18 +4,14 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from typing import Tuple
 
 
-class Preprocessing:
-    available_options = ["s", "min"]
+class Scaling:
 
     @staticmethod
-    def normalize(data: pd.DataFrame, features: list, method: str = "s", feature_range: Tuple = None,
-                  scaler=None) -> (pd.DataFrame, any):
+    def standardize(data: pd.DataFrame, features: list, scaler=None) -> (pd.DataFrame, any):
         """
         @param data The data to be normalized
         @param features The features of the dataset
-        @param method The method which should be used for normalization
-        @param feature_range Feature range. Is required for min max scaler for example.
-        If no range is provided a default -1 to 1 is being used
+        @param scaler The scaler to use
         """
 
         # Input data contains some zeros which results in NaN (or Inf)
@@ -25,31 +21,25 @@ class Preprocessing:
         # https://www.researchgate.net/post/Log_transformation_of_values_that_include_0_zero_for_statistical_analyses2
 
         data = data.where(data != 0, other=1e-32)
-        # data = data.apply(lambda x: np.log10(x) if np.issubdtype(x.dtype, np.number) else x)
-        data = np.log10(data)
+        # print(np.any(np.isnan(data)))
 
-        # filter numeric columns
-        # num_cols = data.columns[data.dtypes.apply(lambda c: np.issubdtype(c, np.number))]
+        if scaler is None:
+            scaler = StandardScaler()
+            scaler.fit(data)
 
-        if method == "s":
-            if scaler is None:
-                scaler = StandardScaler()
-                scaler.fit(data)
+        data = scaler.transform(data)
 
-            data = scaler.transform(data)
+        return pd.DataFrame(columns=features, data=data), scaler
 
-        elif method == "min":
-            if feature_range is not None and scaler is None:
-                scaler = MinMaxScaler(feature_range=feature_range)
-                scaler.fit(data)
-            elif feature_range is None and scaler is None:
-                scaler = MinMaxScaler(feature_range=(-1, 1))
-                scaler.fit(data)
+    @staticmethod
+    def normalize(data: pd.DataFrame, features: list, feature_range: Tuple = None, scaler=None) -> (pd.DataFrame, any):
+        if feature_range is not None and scaler is None:
+            scaler = MinMaxScaler(feature_range=feature_range)
+            scaler.fit(data)
+        elif feature_range is None and scaler is None:
+            scaler = MinMaxScaler(feature_range=(-1, 1))
+            scaler.fit(data)
 
-            data = scaler.transform(data)
-
-        else:
-            raise f"Please provide a valid normalization method. Select one of these options: " \
-                  f"{[option for option in Preprocessing.available_options]}"
+        data = scaler.transform(data)
 
         return pd.DataFrame(columns=features, data=data), scaler
