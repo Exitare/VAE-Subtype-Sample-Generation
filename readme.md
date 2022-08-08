@@ -1,7 +1,12 @@
 VAE-Subtype-Sample-Generation operations
 Goal is to generate TCGA cohort samples
-    based on encoding of all TCGA sample
+    based on encoding of all TCGA samples
     use gene expression data type only
+
+2022-08-08
+test on 1000 x 100 make_classification fabricated data
+# Use latent space dimension of 10 b/c order mag < 100
+sbatch fbrctd.sh 10 fbrctd_00 data/1000_100_X.tsv
 
 2022-08-03
 file prepped with 8009 samples and 99 subtypes
