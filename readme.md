@@ -1,7 +1,11 @@
 VAE-Subtype-Sample-Generation operations
-Goal is to generate TCGA cohort samples
+Generate TCGA cohort samples
     based on encoding of all TCGA samples
     use gene expression data type only
+
+pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
 
 2022-08-08
 test on 1000 x 100 make_classification fabricated data
