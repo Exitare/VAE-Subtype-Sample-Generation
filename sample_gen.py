@@ -10,7 +10,7 @@ from pathlib import Path
 import json
 from tensorflow.keras.models import Model
 # Own created methods
-from library.preprocessing.scaling import Preprocessing
+from library.preprocessing.scaling import Scaling
 from library.preprocessing.splits import SplitHandler
 from library.data.folder_management import FolderManagement
 
@@ -108,9 +108,9 @@ if args.data is not None:
 
     train_data, val_data, test_data = SplitHandler.create_splits(input_data=data, without_val=False)
 
-    train_data, scaler = Preprocessing.normalize(train_data, features=train_data.columns)
-    val_data, _ = Preprocessing.normalize(val_data, features=val_data.columns, scaler=scaler)
-    test_data, _ = Preprocessing.normalize(data=test_data, features=test_data.columns, scaler=scaler)
+    train_data, scaler = Scaling.normalize(train_data, features=train_data.columns)
+    val_data, _ = Scaling.normalize(val_data, features=val_data.columns, scaler=scaler)
+    test_data, _ = Scaling.normalize(data=test_data, features=test_data.columns, scaler=scaler)
 else:
     train_data = pd.read_csv(args.train, sep='\t', index_col=0)
     val_data = pd.read_csv(args.val, sep='\t', index_col=0)
