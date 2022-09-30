@@ -8,3 +8,4 @@ bayesian-optimization
 scipy==1.7
 pydot
 graphviz
+jupyter-lab
