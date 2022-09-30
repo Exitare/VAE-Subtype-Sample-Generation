@@ -3,3 +3,5 @@
 .DS_Store
 *_results/
 __pycache__*
+*.tsv
+*.log
