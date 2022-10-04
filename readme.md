@@ -1,15 +1,18 @@
-VAE-Subtype-Sample-Generation operations
-Generate TCGA cohort samples
+# VAE-Subtype-Sample-Generation operations
+### Goal: Generate TCGA cohort samples
     based on encoding of all TCGA samples
     use gene expression data type only
 
-pip install -r requirements.txt
-python3 -m venv venv
-source venv/bin/activate
+pip install -r requirements.txt  
+python3 -m venv venv  
+source venv/bin/activate  
+
+### 2022-10-04  
+VAE_smpl_gen_04.ipynb pushed, connected to UMAP now  
 
 2022-08-08
 test on 1000 x 100 make_classification fabricated data
-# Use latent space dimension of 10 b/c order mag < 100
+Use latent space dimension of 10 b/c order mag < 100
 sbatch fbrctd.sh 10 fbrctd_00 data/1000_100_X.tsv
 
 2022-08-03
